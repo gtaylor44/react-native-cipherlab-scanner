@@ -3,7 +3,9 @@
 Use react-native on your Android based CipherLab scanner!
 
 ## Supported Models:
-CipherLab RS31
+This fork updates dependencies to support model CipherLab RS35
+
+CipherLab RS31, device library was originally developed for, has not been regression tested.
 
 ## Getting started
 
