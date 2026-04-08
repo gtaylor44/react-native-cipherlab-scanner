@@ -47,6 +47,8 @@ public class CipherLabScannerModule extends ReactContextBaseJavaModule {
 
     public static IModuleCounter MainActivity;
 
+    private boolean enableBinary = false; // moved here for clarity
+
     public CipherLabScannerModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this._reactContext = reactContext;
@@ -70,9 +72,6 @@ public class CipherLabScannerModule extends ReactContextBaseJavaModule {
         Toast.makeText(getReactApplicationContext(), message, duration).show();
     }
 
-    /**
-     * Bridgeless-safe event emitter
-     */
     private void sendEvent(ReactContext reactContext, String eventName, @Nullable WritableMap params) {
         if (reactContext == null || !reactContext.hasActiveReactInstance()) {
             Log.v(DEBUG_TAG, "Skipping event, React instance not active");
@@ -199,8 +198,6 @@ public class CipherLabScannerModule extends ReactContextBaseJavaModule {
         }
     }
 
-    private boolean enableBinary = false;
-
     @ReactMethod
     public void enableBinaryData() {
         enableBinary = true;
@@ -209,6 +206,11 @@ public class CipherLabScannerModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void disableBinaryData() {
         enableBinary = false;
+    }
+
+    // ✅ Added getter so DataReceiver can call it
+    public boolean getBinaryDataEnabled() {
+        return enableBinary;
     }
 
     @ReactMethod
